@@ -1,4 +1,6 @@
-﻿using JucaSystem.Models;
+﻿using JucaSystem.Dto;
+using JucaSystem.Interfaces.IServices;
+using JucaSystem.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -12,10 +14,12 @@ namespace JucaSystem.Controllers
     public class ProdutoController : Controller
     {
         private readonly Context _context;
+        private readonly IProdutoService _produtoService;
 
-        public ProdutoController(Context context)
+        public ProdutoController(Context context, IProdutoService produtoService)
         {
             _context = context;
+            _produtoService = produtoService;
         }
 
         #region Get
@@ -33,11 +37,10 @@ namespace JucaSystem.Controllers
         /// </summary>
         /// <param name="id"></param>      
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id)
+        public Produto GetById(int id)
         {
-            var produtos = await _context.Produtos.FindAsync(id);
-
-            return Ok(produtos);
+            var produtos = _produtoService.GetProdutoById(id);
+            return produtos;
         }
 
         #endregion
@@ -45,21 +48,13 @@ namespace JucaSystem.Controllers
         #region Post
         /// <param name="entidade"></param>  
         [HttpPost]
-        public bool PostPessoa([FromBody] Produto entidade)
+        public bool PostPessoa([FromBody] ProdutoDto entidade)
         {
             try
             {
-                if (entidade == null)
-                {
-                    return false;
-                }
-                else
-                {
-                    _context.Produtos.Add(entidade);
-                    _context.SaveChanges();
+                var produto = _produtoService.InserirNovoProduto(entidade);
 
-                    return true;
-                }
+                return produto;
 
             }
             catch (System.Exception)
@@ -75,28 +70,13 @@ namespace JucaSystem.Controllers
         #region Put
         /// <param name="produtoId"></param>  
         [HttpPut]
-        public bool PutPessoa([FromBody] Produto produto, int produtoId)
+        public Produto PutProduto([FromBody] Produto produto)
         {
             try
             {
-                var entidade = _context.Produtos.Where(p => p.ProdutoId == produtoId).FirstOrDefault();
-                if (entidade == null)
-                {
-                    return false;
-                }
-                else
-                {
-                    var obj = new Produto()
-                    {
-                        ProdutoId = entidade.ProdutoId,
-                        DescricaoObservacao = produto.DescricaoObservacao,
-                        DescricaoProduto = produto.DescricaoObservacao,
-                        ValorProduto = produto.ValorProduto
-                    };
-                    _context.Produtos.Update(obj);
-                    _context.SaveChanges();
-                    return true;
-                }
+                var objProduto = _produtoService.UpdateProduto(produto);
+
+                return objProduto;
 
             }
             catch (System.Exception)
@@ -114,10 +94,8 @@ namespace JucaSystem.Controllers
         {
             try
             {
-                var produto = _context.Produtos.Where(p => p.ProdutoId == produtoId).FirstOrDefault();
-                _context.Produtos.Remove(produto);
-                _context.SaveChanges();
-                return true;
+                var produto = _produtoService.ExcluirProduto(produtoId);
+                return produto;
             }
             catch (System.Exception)
             {
