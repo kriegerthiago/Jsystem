@@ -44,6 +44,10 @@ namespace JucaSystem
 
 
             services.AddScoped<IPessoaService, PessoaService>();
+            services.AddScoped<IProdutoService, ProdutoService>();
+            services.AddScoped<ICompraService, CompraService>();
+            services.AddScoped<IItemCompraService, ItemCompraService>();
+            services.AddScoped<ILojaService, LojaService>();
             services.AddScoped<IIncrementoHelperService, IncrementoHelper>();
         }
 

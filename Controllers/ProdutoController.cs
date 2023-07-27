@@ -68,7 +68,7 @@ namespace JucaSystem.Controllers
         #endregion
 
         #region Put
-        /// <param name="produtoId"></param>  
+        /// <param name="produto"></param>  
         [HttpPut]
         public Produto PutProduto([FromBody] Produto produto)
         {
@@ -90,7 +90,7 @@ namespace JucaSystem.Controllers
         #region Delete
         /// <param name="produtoId"></param>  
         [HttpDelete]
-        public bool DeletePessoa([FromBody] int produtoId)
+        public bool DeletePessoa(int produtoId)
         {
             try
             {

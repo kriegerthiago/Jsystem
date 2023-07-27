@@ -1,4 +1,6 @@
-﻿using JucaSystem.Models;
+﻿using JucaSystem.Dto;
+using JucaSystem.Interfaces.IServices;
+using JucaSystem.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -11,11 +13,12 @@ namespace JucaSystem.Controllers
     [Route("api/[controller]")]
     public class LojaController : Controller
     {
-
         private readonly Context _context;
-        public LojaController(Context context)
+        private readonly ILojaService _lojaService;
+        public LojaController(Context context, ILojaService lojaService)
         {
             _context = context;
+            _lojaService = lojaService;
         }
 
         #region Get
@@ -33,11 +36,11 @@ namespace JucaSystem.Controllers
         /// </summary>
         /// <param name="id"></param>      
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id)
+        public Loja GetById(int id)
         {
-            var pessoas = await _context.Lojas.FindAsync(id);
+            var loja = _lojaService.GetLojaById(id);
 
-            return Ok(pessoas);
+            return loja;
         }
 
         #endregion
@@ -45,27 +48,11 @@ namespace JucaSystem.Controllers
         #region Post
         /// <param name="entidade"></param>  
         [HttpPost]
-        public bool PostLoja([FromBody] Loja entidade)
+        public bool PostLoja([FromBody] LojaDto entidade)
         {
-            try
-            {
-                if (entidade == null)
-                {
-                    return false;
-                }
-                else
-                {
-                    _context.Lojas.Add(entidade);
-                    _context.SaveChanges();
+            var novaLoja = _lojaService.InserirNovaLoja(entidade);
 
-                    return true;
-                }
-
-            }
-            catch (System.Exception)
-            {
-                throw;
-            }
+            return novaLoja;
         }
 
 
@@ -74,56 +61,21 @@ namespace JucaSystem.Controllers
 
         #region Put
         /// <param name="loja"></param>  
-        /// <param name="lojaId"></param>  
         [HttpPut]
-        public bool PutLoja([FromBody] Loja loja, int lojaId)
+        public Loja PutLoja([FromBody] Loja loja)
         {
-            try
-            {
-                var entidade = _context.Lojas.Where(p => p.LojaId == lojaId).FirstOrDefault();
-                if (entidade == null)
-                {
-                    return false;
-                }
-                else
-                {
-                    var obj = new Loja()
-                    {
-                        DescricaoEndereco = loja.DescricaoEndereco,
-                        DescricaoNome = loja.DescricaoNome,
-                        LojaId = entidade.LojaId
-                    };
-                    _context.Lojas.Update(obj);
-                    _context.SaveChanges();
-                    return true;
-                }
-
-            }
-            catch (System.Exception)
-            {
-
-                throw;
-            }
+            var lojaAlterada = _lojaService.UpdateLoja(loja);
+            return lojaAlterada;
         }
         #endregion
-
+        
         #region Delete
-        /// <param name="pessoaId"></param>  
+        /// <param name="lojaId"></param>  
         [HttpDelete]
-        public bool DeleteLoja([FromBody] int lojaId)
+        public bool DeleteLoja(int lojaId)
         {
-            try
-            {
-                var loja = _context.Lojas.Where(p => p.LojaId == lojaId).FirstOrDefault();
-                _context.Lojas.Remove(loja);
-                _context.SaveChanges();
-                return true;
-            }
-            catch (System.Exception)
-            {
-
-                throw;
-            }
+            var lojaExcluida = _lojaService.DeleteLoja(lojaId);
+            return lojaExcluida;
         }
         #endregion
 

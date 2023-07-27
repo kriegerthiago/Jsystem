@@ -1,4 +1,6 @@
-﻿using JucaSystem.Models;
+﻿using JucaSystem.Dto;
+using JucaSystem.Interfaces.IServices;
+using JucaSystem.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -11,9 +13,12 @@ namespace JucaSystem.Controllers
     public class ItemCompraController : Controller
     {
         private readonly Context _context;
-        public ItemCompraController(Context context)
+        private readonly IItemCompraService _itemCompraService;
+
+        public ItemCompraController(Context context, IItemCompraService itemCompraService)
         {
             _context = context;
+            _itemCompraService = itemCompraService;
         }
 
         #region Get
@@ -25,7 +30,7 @@ namespace JucaSystem.Controllers
         [HttpGet("{compraId}")]
         public List<ItemCompra> GetItensPorCompra(int compraId)
         {
-            var itensDaCompra = _context.ItensCompras.Where(p => p.CompraId == compraId).ToList();
+            var itensDaCompra = _itemCompraService.GetItensPorCompra(compraId);
 
             return itensDaCompra;
         }
@@ -35,27 +40,11 @@ namespace JucaSystem.Controllers
         #region Post
         /// <param name="entidade"></param>  
         [HttpPost]
-        public bool PostItemCompra([FromBody] ItemCompra entidade)
+        public bool PostItemCompra([FromBody] ItemCompraDto entidade)
         {
-            try
-            {
-                if (entidade == null)
-                {
-                    return false;
-                }
-                else
-                {
-                    _context.ItensCompras.Add(entidade);
-                    _context.SaveChanges();
+            var result = _itemCompraService.NovoItemCompra(entidade);
 
-                    return true;
-                }
-
-            }
-            catch (System.Exception)
-            {
-                throw;
-            }
+            return result;
         }
 
 
@@ -63,52 +52,24 @@ namespace JucaSystem.Controllers
         #endregion
 
         #region Put
-        /// <param name="pessoaId"></param>  
+        /// <param name="itemCompra"></param>  
         [HttpPut]
-        public bool PutCompras([FromBody] ItemCompra itemcompra, int compraId)
+        public ItemCompra PutCompras([FromBody] ItemCompra itemcompra)
         {
-            try
-            {
-                var entidade = _context.ItensCompras.Where(p => p.CompraId == compraId).FirstOrDefault();
-                if (entidade == null)
-                {
-                    return false;
-                }
-                else
-                {
-                    var obj = new ItemCompra()
-                    {
-                        CompraId = entidade.CompraId,
-                        ItemCompraId = entidade.ItemCompraId,
-                        ProdutoId = itemcompra.ProdutoId,
-                        QuantidadeComprada = itemcompra.QuantidadeComprada,
-                        ValorItem = itemcompra.ValorItem
-                    };
-                    _context.ItensCompras.Update(obj);
-                    _context.SaveChanges();
-                    return true;
-                }
-
-            }
-            catch (System.Exception)
-            {
-
-                throw;
-            }
+            var result = _itemCompraService.UpdateItemCompra(itemcompra);
+            return result;
         }
         #endregion
 
         #region Delete
-        /// <param name="compraId"></param>  
+        /// <param name="itemCompraId"></param>  
         [HttpDelete]
-        public bool DeleteItemCompra([FromBody] int itemCompraId)
+        public bool DeleteItemCompra(int itemCompraId)
         {
             try
             {
-                var compra = _context.ItensCompras.Where(p => p.ItemCompraId == itemCompraId).FirstOrDefault();
-                _context.ItensCompras.Remove(compra);
-                _context.SaveChanges();
-                return true;
+                var itemDeletado = _itemCompraService.DeleteItemCompra(itemCompraId);
+                return itemDeletado;
             }
             catch (System.Exception)
             {
