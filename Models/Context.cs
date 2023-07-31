@@ -19,6 +19,7 @@ namespace JucaSystem.Models
         public DbSet<ItemCompra> ItensCompras { get; set; }
         public DbSet<Loja> Lojas { get; set; }
         public DbSet<Produto> Produtos { get; set; }
+        public DbSet<Login> Logins { get; set }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
