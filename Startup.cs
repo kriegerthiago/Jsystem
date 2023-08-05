@@ -1,7 +1,7 @@
-using JucaSystem.Helper;
-using JucaSystem.Interfaces.IServices;
-using JucaSystem.Models;
-using JucaSystem.Services;
+using JucaSystemWebApi.Helper;
+using JucaSystemWebApi.Interfaces.IServices;
+using JucaSystemWebApi.Models;
+using JucaSystemWebApi.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -20,7 +20,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JucaSystem
+namespace JucaSystemWebApi
 {
     public class Startup
     {

@@ -1,13 +1,13 @@
-﻿using JucaSystem.Dto;
-using JucaSystem.Interfaces.IServices;
-using JucaSystem.Models;
+﻿using JucaSystemWebApi.Dto;
+using JucaSystemWebApi.Interfaces.IServices;
+using JucaSystemWebApi.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace JucaSystem.Controllers
+namespace JucaSystemWebApi.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]

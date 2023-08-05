@@ -3,7 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33502.453
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JucaSystem", "JucaSystem.csproj", "{239C9B01-0DF0-49F5-9D72-BC2D94CEDD73}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JucaSystemWebApi", "JucaSystemWebApi.csproj", "{239C9B01-0DF0-49F5-9D72-BC2D94CEDD73}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Juca.Application", "..\Juca.Application\Juca.Application.csproj", "{BFDE3A4A-C223-4F24-BD23-FC64510ED99B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Juca.Domain", "..\Juca.Domain\Juca.Domain.csproj", "{15A4ED37-381E-41A0-A6B2-F06B1E3F8498}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Juca.DataLayer", "..\Juca.DataLayer\Juca.DataLayer.csproj", "{7D01ADC5-E19A-4026-8B1C-EA919F34E246}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Juca.CrossCutting", "..\Juca.CrossCutting\Juca.CrossCutting.csproj", "{686F8034-D8E0-4F1F-942A-5FEE566FD6FB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +23,22 @@ Global
 		{239C9B01-0DF0-49F5-9D72-BC2D94CEDD73}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{239C9B01-0DF0-49F5-9D72-BC2D94CEDD73}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{239C9B01-0DF0-49F5-9D72-BC2D94CEDD73}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFDE3A4A-C223-4F24-BD23-FC64510ED99B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFDE3A4A-C223-4F24-BD23-FC64510ED99B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFDE3A4A-C223-4F24-BD23-FC64510ED99B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFDE3A4A-C223-4F24-BD23-FC64510ED99B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15A4ED37-381E-41A0-A6B2-F06B1E3F8498}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15A4ED37-381E-41A0-A6B2-F06B1E3F8498}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15A4ED37-381E-41A0-A6B2-F06B1E3F8498}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15A4ED37-381E-41A0-A6B2-F06B1E3F8498}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D01ADC5-E19A-4026-8B1C-EA919F34E246}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D01ADC5-E19A-4026-8B1C-EA919F34E246}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D01ADC5-E19A-4026-8B1C-EA919F34E246}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D01ADC5-E19A-4026-8B1C-EA919F34E246}.Release|Any CPU.Build.0 = Release|Any CPU
+		{686F8034-D8E0-4F1F-942A-5FEE566FD6FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{686F8034-D8E0-4F1F-942A-5FEE566FD6FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{686F8034-D8E0-4F1F-942A-5FEE566FD6FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{686F8034-D8E0-4F1F-942A-5FEE566FD6FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

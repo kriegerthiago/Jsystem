@@ -1,4 +1,4 @@
-﻿namespace JucaSystem
+﻿namespace JucaSystemWebApi
 {
     public static class Settings
     {
