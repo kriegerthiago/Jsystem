@@ -1,10 +1,9 @@
-﻿using JucaSystemWebApi.Dto;
-using JucaSystemWebApi.Interfaces.IServices;
+﻿using Juca.Application.Dto;
+using Juca.Application.Interfaces.IServices;
+using Juca.Domain.Models;
 using JucaSystemWebApi.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace JucaSystemWebApi.Controllers
 {

@@ -1,7 +1,7 @@
-﻿using JucaSystemWebApi.Dto;
-using JucaSystemWebApi.Interfaces.IServices;
+﻿using Juca.Application.Dto;
+using Juca.Application.Interfaces.IServices;
+using Juca.Domain.Models;
 using JucaSystemWebApi.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
@@ -68,7 +68,7 @@ namespace JucaSystemWebApi.Controllers
             return lojaAlterada;
         }
         #endregion
-        
+
         #region Delete
         /// <param name="lojaId"></param>  
         [HttpDelete]
