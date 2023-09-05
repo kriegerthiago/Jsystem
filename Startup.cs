@@ -1,7 +1,9 @@
 using Juca.Application.Interfaces.IServices;
 using Juca.Application.Services;
+using Juca.Domain.Interfaces.IRepositories;
 using JucaSystemWebApi.Helper;
 using JucaSystemWebApi.Models;
+using JucaSystemWebApi.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -63,6 +65,12 @@ namespace JucaSystemWebApi
             services.AddScoped<IItemCompraService, ItemCompraService>();
             services.AddScoped<ILojaService, LojaService>();
             services.AddScoped<IIncrementoHelperService, IncrementoHelper>();
+            services.AddScoped<ILoginService, LoginService>();
+
+
+            services.AddScoped<ILoginRepository, LoginRepository>();
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
